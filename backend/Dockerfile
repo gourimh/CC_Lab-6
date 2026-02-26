@@ -1,9 +1,12 @@
-FROM alpine:latest
+FROM alpine
 
-RUN apk add --no-cache g++
+RUN apk add --no-cache busybox-extras
 
 WORKDIR /app
 
-COPY . .
+COPY server.sh /app/server.sh
+RUN chmod +x /app/server.sh
 
-CMD ["echo", "Backend container running"]
+EXPOSE 8080
+
+CMD ["sh", "/app/server.sh"]
